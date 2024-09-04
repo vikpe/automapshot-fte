@@ -31,7 +31,7 @@ export function useFteLoader({
     }
 
     didInit = true;
-    
+
     const manifestUrl = getAssetUrl("fte/default.fmf");
     window.Module = {
       canvas: document.getElementById("fteCanvas") as HTMLCanvasElement,

@@ -1,5 +1,5 @@
-import { useFteLoader } from "@/vendor/fte/hooks";
 import { getGeneralAssets } from "@/vendor/fte/assets";
+import { useFteLoader } from "@/vendor/fte/hooks";
 
 const scriptPath = "/ftewebgl_qtv.js";
 const assets = {
