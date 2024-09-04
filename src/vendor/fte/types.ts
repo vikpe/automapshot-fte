@@ -6,11 +6,3 @@ export type FtePreloadModule = {
   manifest: string;
   files: object;
 };
-
-export type FteModule = FtePreloadModule & {
-  getClientState: () => void;
-};
-
-export interface FTEC {
-  cbufadd: (command: string) => void;
-}

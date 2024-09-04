@@ -7,15 +7,15 @@ import {
 // https://playwright.dev/docs/test-configuration
 export default defineConfig({
   fullyParallel: true,
-  workers: 6,
+  workers: 2,
+  webServer: {
+    command: "yarn dev",
+  },
   projects: [
     {
       name: "chromium",
       use: {
         ...devices["Desktop Chrome"],
-        contextOptions: {
-          permissions: ["clipboard-write"],
-        },
       },
     },
   ],

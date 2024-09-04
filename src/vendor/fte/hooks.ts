@@ -1,18 +1,16 @@
-import type {
-  FteAssets,
-  FteModule,
-  FtePreloadModule,
-} from "@/vendor/fte/types.ts";
+import type { FteAssets, FtePreloadModule } from "@/vendor/fte/types.ts";
 import { getAssetUrl } from "@/vendor/qwcloudfront/assets/assets";
 import { useEffect } from "react";
-import { useBoolean, useInterval, useScript } from "usehooks-ts";
+import { useBoolean, useEventListener, useScript } from "usehooks-ts";
+import { enableLogToEvents } from "./log";
 
 declare global {
   interface Window {
-    Module: FteModule | FtePreloadModule;
+    Module: FtePreloadModule;
   }
 }
 
+enableLogToEvents();
 let didInit = false;
 
 export function useFteLoader({
@@ -41,15 +39,7 @@ export function useFteLoader({
     };
   }, []);
 
-  useInterval(
-    () => {
-      if ((window.Module as FteModule).getClientState) {
-        window.dispatchEvent(new CustomEvent("fte.event.ready"));
-        setIsReady();
-      }
-    },
-    isReady ? null : 100,
-  );
+  useEventListener("fte.event.ready", setIsReady);
 
   return { isReady };
 }

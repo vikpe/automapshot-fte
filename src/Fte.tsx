@@ -8,6 +8,11 @@ const assets = {
 };
 
 export function FtePlayer() {
-  useFteLoader({ scriptPath, assets });
-  return <canvas id="fteCanvas" />;
+  const { isReady } = useFteLoader({ scriptPath, assets });
+  return (
+    <div>
+      {isReady && <div id="fteCanvasIsReady" />}
+      <canvas id="fteCanvas" />
+    </div>
+  );
 }
