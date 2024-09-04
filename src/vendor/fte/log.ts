@@ -25,6 +25,8 @@ function eventByMessage(message: string): Event | null {
   switch (message) {
     case "WebGL renderer initialized":
       return new Event("fte.event.ready");
+    case "fte.trigger.f_newmap":
+      return new Event("fte.trigger.f_newmap");
     default:
       return null;
   }

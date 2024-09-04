@@ -1,28 +1,14 @@
 import { expect, test } from "@playwright/test";
 
+import mapSettings from "./map_settings";
+
 const config = {
   timeout: 20_000,
   size: { width: 1024, height: 768 },
   quality: 90,
 };
 
-const mapSettings = [
-  { name: "dm2", pos: "1891 -1322 188 21 116 0" },
-  { name: "dm3", pos: "1768 -321 1 26 124 0" },
-  { name: "dm4", pos: "200 -97 26; 26 303 0" },
-  { name: "dm6", pos: "783 -1329 158 28 40 0" },
-  { name: "e1m1", pos: "-112 704 56 20 45 0" },
-  { name: "e1m2", pos: "117 303 522 29 229 0" },
-  { name: "e1m3", pos: "-544 24 176 20 225 0" },
-  { name: "e1m4", pos: "384 488 1552 26 310 0" },
-  { name: "e1m5", pos: "64 264 592 24 130 0" },
-  { name: "e1m6", pos: "48 912 248 20 315 0" },
-  { name: "e1m7", pos: "-16 384 368 20 315 0" },
-];
-
-for (const settings of mapSettings) {
-  const { name, pos } = settings;
-
+for (const [name, pos] of Object.entries(mapSettings)) {
   test(name, async ({ page }) => {
     test.setTimeout(config.timeout);
     const fte = page.locator("#fteCanvas");
@@ -30,7 +16,7 @@ for (const settings of mapSettings) {
     await test.step("load fte", async () => {
       await page.setViewportSize(config.size);
       await page.goto("http://localhost:5173");
-      await expect(page.locator("#fteCanvasIsReady")).toBeAttached();
+      await expect(page.locator("#fteEngineIsReady")).toBeAttached();
       await page.keyboard.press("Escape", { delay: 100 }); // close main menu
     });
 
@@ -43,7 +29,7 @@ for (const settings of mapSettings) {
       );
       await fte.press("Enter");
       await mapDownload;
-      await page.waitForTimeout(250);
+      await expect(page.locator("#fteMapIsReady")).toBeAttached();
     });
 
     await test.step("load pos", async () => {

@@ -21,7 +21,8 @@ export function useFteLoader({
   assets: FteAssets;
 }) {
   useScript(scriptPath, { removeOnUnmount: true });
-  const { value: isReady, setTrue: setIsReady } = useBoolean(false);
+  const { value: engineIsReady, setTrue: setEngineIsReady } = useBoolean(false);
+  const { value: mapIsReady, setTrue: setMapIsReady } = useBoolean(false);
 
   useEffect(() => {
     if (didInit) {
@@ -39,7 +40,8 @@ export function useFteLoader({
     };
   }, []);
 
-  useEventListener("fte.event.ready", setIsReady);
+  useEventListener("fte.event.ready", setEngineIsReady);
+  useEventListener("fte.trigger.f_newmap", setMapIsReady);
 
-  return { isReady };
+  return { engineIsReady, mapIsReady };
 }

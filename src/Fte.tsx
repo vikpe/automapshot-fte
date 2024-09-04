@@ -8,10 +8,12 @@ const assets = {
 };
 
 export function FtePlayer() {
-  const { isReady } = useFteLoader({ scriptPath, assets });
+  const { engineIsReady, mapIsReady } = useFteLoader({ scriptPath, assets });
+
   return (
     <div>
-      {isReady && <div id="fteCanvasIsReady" />}
+      {engineIsReady && <div id="fteEngineIsReady" />}
+      {mapIsReady && <div id="fteMapIsReady" />}
       <canvas id="fteCanvas" />
     </div>
   );
