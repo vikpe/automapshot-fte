@@ -7,6 +7,6 @@ yarn install
 ```
 
 ## Usage
-```
+```shell
 npx playwright test
 ```
