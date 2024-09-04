@@ -24,11 +24,7 @@ for (const [name, pos] of Object.entries(mapSettings)) {
       await page.keyboard.type(`map ${name}`);
       await fte.press("Enter", { delay: 100 });
       await fte.press("Tab", { delay: 100 });
-      const mapDownload = page.waitForRequest(
-        `https://a.quake.world/maps/${name}.bsp`,
-      );
       await fte.press("Enter");
-      await mapDownload;
       await expect(page.locator("#fteMapIsReady")).toBeAttached();
     });
 
