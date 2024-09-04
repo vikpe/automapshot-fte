@@ -1,5 +1,5 @@
 # automapshot-web
-> Automate screenshots using FTE web and Playwright
+> Automate screenshots using [FTE](https://fte.triptohell.info/) (web) and [Playwright](https://playwright.dev/)
 
 ## Setup
 ```shell
