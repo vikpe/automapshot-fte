@@ -7,7 +7,7 @@ import {
 // https://playwright.dev/docs/test-configuration
 export default defineConfig({
   fullyParallel: true,
-  workers: 2,
+  workers: 1,
   webServer: {
     command: "yarn dev",
   },
