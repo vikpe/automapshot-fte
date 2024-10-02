@@ -41,7 +41,9 @@ export function useFteLoader({
   }, []);
 
   useEventListener("fte.event.ready", setEngineIsReady);
-  useEventListener("fte.trigger.f_newmap", setMapIsReady);
+  useEventListener("fte.trigger.f_newmap", () => {
+    window.setTimeout(setMapIsReady, 250);
+  });
 
   return { engineIsReady, mapIsReady };
 }
