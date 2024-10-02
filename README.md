@@ -8,8 +8,8 @@
 yarn install
 ```
 
-* Rename `config.example.ts` to `config.ts`
-* Rename `config.maps.example.ts` to `config.maps.ts`
+* Rename `config.example.json` to `config.json`
+* Rename `config.maps.example.json` to `config.maps.json`
 
 ## Usage
 
