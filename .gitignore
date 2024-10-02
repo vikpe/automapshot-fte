@@ -3,5 +3,5 @@ dist/
 node_modules/
 test-results/
 .env.local
-config.maps.json
+config.maps.ts
 config.ts
