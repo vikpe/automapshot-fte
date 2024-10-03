@@ -1,6 +1,7 @@
-# automapshot-web
+# automapshot-fte
 
-> Automate screenshots using [FTE](https://fte.triptohell.info/) (web) and [Playwright](https://playwright.dev/)
+> Automate screenshots of QuakeWorld maps (mapshots) using [FTE](https://fte.triptohell.info/)
+> and [Playwright](https://playwright.dev/)
 
 ## Setup
 
@@ -43,3 +44,9 @@ npx playwright test --grep "#dm2#"
 ```shell
 npx playwright test --grep "dm2"
 ```
+
+## Related projects
+
+* [QuakeWorld Mapshots](https://github.com/vikpe/qw-mapshots)
+* [FTEQW](https://github.com/fte-team/fteqw)
+* [Playwright](https://github.com/microsoft/playwright)
