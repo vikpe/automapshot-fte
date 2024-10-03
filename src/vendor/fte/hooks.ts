@@ -1,8 +1,9 @@
-import type { FteAssets, FtePreloadModule } from "@/vendor/fte/types.ts";
+import type { FtePreloadModule } from "@/vendor/fte/types.ts";
 import { getAssetUrl } from "@/vendor/qwcloudfront/assets/assets";
 import { useEffect } from "react";
 import { useBoolean, useEventListener, useScript } from "usehooks-ts";
 import { enableLogToEvents } from "./log";
+import { getGeneralAssets, getMapAssets } from "@/vendor/fte/assets";
 
 declare global {
   interface Window {
@@ -15,11 +16,17 @@ let didInit = false;
 
 export function useFteLoader({
   scriptPath,
-  assets,
+  mapName,
 }: {
   scriptPath: string;
-  assets: FteAssets;
+  mapName: string;
 }) {
+  const assets = {
+    ...getGeneralAssets(),
+    ...getMapAssets(mapName),
+    "id1/config.cfg": "config.cfg",
+    "qw/qwprogs.qvm": "20240909-210239_2b31159_qwprogs.qvm",
+  };
   useScript(scriptPath, { removeOnUnmount: true });
   const { value: engineIsReady, setTrue: setEngineIsReady } = useBoolean(false);
   const { value: mapIsReady, setTrue: setMapIsReady } = useBoolean(false);
@@ -35,7 +42,7 @@ export function useFteLoader({
     window.Module = {
       canvas: document.getElementById("fteCanvas") as HTMLCanvasElement,
       manifest: manifestUrl,
-      arguments: ["-manifest", manifestUrl],
+      arguments: ["-manifest", manifestUrl, "+map", mapName],
       files: assets,
     };
   }, []);

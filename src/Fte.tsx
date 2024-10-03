@@ -1,23 +1,49 @@
-import { getGeneralAssets, getMapAssets } from "@/vendor/fte/assets";
 import { useFteLoader } from "@/vendor/fte/hooks";
+import { useEffect, useState } from "react";
 
-// read mapname from map query param
-const scriptPath = "/ftewebgl.js";
-const assets = {
-  ...getGeneralAssets(),
-  ...getMapAssets(new URLSearchParams(window.location.search).get("map") || ""),
-  "id1/config.cfg": "config.cfg",
-  "qw/qwprogs.qvm": "20240909-210239_2b31159_qwprogs.qvm",
-};
+declare global {
+  interface Window {
+    FTEC: {
+      cbufadd: (command: string) => void;
+    };
+  }
+}
+
+const params = new URLSearchParams(window.location.search);
 
 export function FtePlayer() {
-  const { engineIsReady, mapIsReady } = useFteLoader({ scriptPath, assets });
+  const { engineIsReady, mapIsReady } = useFteLoader({
+    scriptPath: "/ftewebgl.js",
+    mapName: params.get("map") || "start",
+  });
+  const [shotReady, setShotReady] = useState(false);
+
+  useEffect(() => {
+    if (mapIsReady) {
+      fte_command("toggleconsole");
+      fte_command("setpos", params.get("posangle") || "");
+
+      // wait for new pos to render
+      window.setTimeout(() => {
+        setShotReady(true);
+      }, 200);
+    }
+  }, [mapIsReady]);
 
   return (
     <div>
       {engineIsReady && <div id="fteEngineIsReady" />}
-      {mapIsReady && <div id="fteMapIsReady" />}
+      {shotReady && <div id="fteShotIsReady" />}
       <canvas id="fteCanvas" />
     </div>
   );
+}
+
+function fte_command(command: string, value?: undefined | string | number) {
+  try {
+    const commandStr = value !== undefined ? `${command} ${value}` : command;
+    window.FTEC.cbufadd(`${commandStr}\n`);
+  } catch (e) {
+    console.log(`fte command error: ${e}`);
+  }
 }
