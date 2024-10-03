@@ -11,7 +11,7 @@ declare global {
 
 const params = new URLSearchParams(window.location.search);
 
-export function FtePlayer() {
+export function FteMapViewer() {
   const { engineIsReady, mapIsReady } = useFteLoader({
     scriptPath: "/ftewebgl.js",
     mapName: params.get("map") || "start",
@@ -22,11 +22,12 @@ export function FtePlayer() {
     if (mapIsReady) {
       fte_command("toggleconsole");
       fte_command("setpos", params.get("posangle") || "");
+      fte_command("cl_maxfps", 1);
 
       // wait for new pos to render
       window.setTimeout(() => {
         setShotReady(true);
-      }, 200);
+      }, 250);
     }
   }, [mapIsReady]);
 
