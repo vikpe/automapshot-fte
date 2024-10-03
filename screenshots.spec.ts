@@ -4,7 +4,7 @@ import mapConfig from "./config.maps";
 import config from "./config";
 
 for (const [name, posAngle] of Object.entries(mapConfig)) {
-  test(name, async ({ page }) => {
+  test(`#${name}#`, async ({ page }) => {
     test.setTimeout(config.timeout);
     await test.step("load FTE", async () => {
       await page.setViewportSize(config.size);
