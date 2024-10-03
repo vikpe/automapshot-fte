@@ -1,5 +1,3 @@
-import type { FteAssets } from "./types.ts";
-
 import { getAssetUrl } from "@/vendor/qwcloudfront/assets/assets";
 
 function stripSuffixes(mapName: string): string {
@@ -10,10 +8,10 @@ function stripSuffixes(mapName: string): string {
   return mapName.replace(/(.+?)[_\-]?beta(\d+)?$/gim, "$1");
 }
 
-export function getMapTextures(mapName: string): FteAssets {
+export function getMapTextures(mapName: string): { [key: string]: string } {
   const filenames = texturesPerMapName[stripSuffixes(mapName)] ?? [];
   const filepaths = filenames.map((t) => `qw/textures/${mapName}/${t}`);
-  const assets: FteAssets = {};
+  const assets: { [key: string]: string } = {};
 
   for (const path of filepaths) {
     assets[path] = getAssetUrl(`fte/${path}`);

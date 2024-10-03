@@ -1,9 +1,6 @@
 export default {
-  timeout: 30000,
-  size: {
-    width: 1280,
-    height: 720,
-  },
-  quality: 90,
-  mapTimeout: 15000,
+  width: 1280,
+  height: 720,
+  jpegQuality: 90, // 1-100
+  skipExisting: true, // skip if screenshot already exist in /dist
 };

@@ -1,9 +1,8 @@
 import { getAssetUrl } from "@/vendor/qwcloudfront/assets/assets";
 import { getMapTextures } from "./mapTextures";
-import type { FteAssets } from "./types.ts";
 
-export function getMapAssets(mapName: string): FteAssets {
-  const assets: FteAssets = {
+export function getMapAssets(mapName: string): { [key: string]: string } {
+  const assets: { [key: string]: string } = {
     [`id1/maps/${mapName}.lit`]: getAssetUrl(`maps/${mapName}.lit`),
   };
 
@@ -13,7 +12,7 @@ export function getMapAssets(mapName: string): FteAssets {
   };
 }
 
-export function getGeneralAssets(): FteAssets {
+export function getGeneralAssets(): { [key: string]: string } {
   const filePaths = [
     "default.fmf",
 
@@ -106,7 +105,7 @@ export function getGeneralAssets(): FteAssets {
     "id1/progs/zom_gib.mdl",
   ];
 
-  const assets: FteAssets = {};
+  const assets: { [key: string]: string } = {};
 
   for (const path of filePaths) {
     assets[path] = getAssetUrl(`fte/${path}`);

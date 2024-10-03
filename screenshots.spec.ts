@@ -1,13 +1,29 @@
 import { expect, test } from "@playwright/test";
 
-import mapConfig from "./config.maps";
-import config from "./config";
+import mapsConfig from "./config.maps";
+import userConfig from "./config";
+import { existsSync } from "node:fs";
 
-for (const [name, posAngle] of Object.entries(mapConfig)) {
+const sysConfig = {
+  testTimeout: 30_000,
+  mapTimeout: 15_000,
+};
+
+for (const [name, posAngle] of Object.entries(mapsConfig)) {
   test(`#${name}#`, async ({ page }) => {
-    test.setTimeout(config.timeout);
+    const destPath = `./dist/${name}.jpg`;
+    test.skip(
+      userConfig.skipExisting && existsSync(destPath),
+      "Screenshot already exists",
+    );
+
+    test.setTimeout(sysConfig.testTimeout);
+
     await test.step("load FTE", async () => {
-      await page.setViewportSize(config.size);
+      await page.setViewportSize({
+        width: userConfig.width,
+        height: userConfig.height,
+      });
       await page.goto(`http://localhost:5173?map=${name}&posangle=${posAngle}`);
       await expect(page.locator("#fteEngineIsReady")).toBeAttached();
     });
@@ -21,15 +37,15 @@ for (const [name, posAngle] of Object.entries(mapConfig)) {
 
     await test.step("set pos/angle", async () => {
       await expect(page.locator("#fteShotIsReady")).toBeAttached({
-        timeout: config.mapTimeout,
+        timeout: sysConfig.mapTimeout,
       });
     });
 
     await test.step("save screenshot", async () => {
       await fte.screenshot({
         animations: "disabled",
-        path: `./dist/${name}.jpg`,
-        quality: config.quality,
+        path: destPath,
+        quality: userConfig.jpegQuality,
         type: "jpeg",
       });
     });

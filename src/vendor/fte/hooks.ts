@@ -1,5 +1,4 @@
 import { getGeneralAssets, getMapAssets } from "@/vendor/fte/assets";
-import type { FtePreloadModule } from "@/vendor/fte/types.ts";
 import { getAssetUrl } from "@/vendor/qwcloudfront/assets/assets";
 import { useEffect } from "react";
 import { useBoolean, useEventListener, useScript } from "usehooks-ts";
@@ -7,7 +6,12 @@ import { enableLogToEvents } from "./log";
 
 declare global {
   interface Window {
-    Module: FtePreloadModule;
+    Module: {
+      canvas: HTMLCanvasElement;
+      arguments: string[];
+      manifest: string;
+      files: object;
+    };
   }
 }
 
