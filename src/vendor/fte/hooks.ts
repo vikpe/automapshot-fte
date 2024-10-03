@@ -47,7 +47,10 @@ export function useFteLoader({
     };
   }, []);
 
+  // @ts-ignore: custom event
   useEventListener("fte.event.ready", setEngineIsReady);
+
+  // @ts-ignore: custom event
   useEventListener("fte.trigger.f_newmap", () => {
     window.setTimeout(setMapIsReady, 250);
   });
