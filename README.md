@@ -3,6 +3,8 @@
 > Automate screenshots of QuakeWorld maps (mapshots) using [FTE](https://fte.triptohell.info/)
 > and [Playwright](https://playwright.dev/)
 
+![Aerowalk](https://github.com/vikpe/qw-mapshots/blob/main/aerowalk.jpg?raw=true)
+
 ## Setup
 
 ```shell
