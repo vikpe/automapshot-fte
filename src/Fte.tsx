@@ -22,10 +22,10 @@ export function FteMapViewer() {
     if (mapIsReady) {
       fte_command("toggleconsole");
       fte_command("setpos", params.get("posangle") || "");
-      fte_command("cl_maxfps", 1);
 
       // wait for new pos to render
       window.setTimeout(() => {
+        fte_command("cl_maxfps", 1);
         setShotReady(true);
       }, 250);
     }
