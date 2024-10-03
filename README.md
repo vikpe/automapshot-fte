@@ -16,7 +16,9 @@ yarn install
 2. Rename `config.maps.example.ts` to `config.maps.ts`
 3. (optional) edit `config.ts`
 
-## Default config
+## Configuration
+
+### General config (`config.ts`)
 
 ```ts
 export default {
@@ -24,6 +26,18 @@ export default {
     height: 720,
     jpegQuality: 90, // 1-100
     skipExisting: true, // skip if screenshot already exist in /dist
+};
+```
+
+### Map config (`config.maps.ts`)
+
+Camera position (first triplet) and angle (second triplet).
+
+```ts
+export default {
+    "2bfree": "1380 1067 468 25 194 0",
+    "dm3": "1835 -342 18 19 128 0",
+    "outpost": "0 0 480 90 91 -59",
 };
 ```
 
