@@ -27,7 +27,7 @@ export function FteMapViewer() {
       window.setTimeout(() => {
         fte_command("cl_maxfps", 1);
         setShotReady(true);
-      }, 250);
+      }, 500);
     }
   }, [mapIsReady]);
 
