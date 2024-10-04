@@ -10,6 +10,10 @@ const sysConfig = {
 };
 
 for (const [name, posAngle] of Object.entries(mapsConfig)) {
+  if (["", "todo"].includes(posAngle.toLowerCase())) {
+    continue;
+  }
+
   test(`#${name}#`, async ({ page }) => {
     const destPath = `./dist/${name}.jpg`;
     test.skip(
