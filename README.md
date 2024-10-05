@@ -61,6 +61,17 @@ npx playwright test --grep "#dm2#"
 npx playwright test --grep "dm2"
 ```
 
+## Tips
+
+### Batch compression
+
+Playwrights compression is sub-optimal. Use mogrify from the imagemagik package for better compression.
+
+```sh
+mkdir -p dist/compressed
+mogrify -format jpg -quality 80 -path dist/compressed dist/*.jpg
+```
+
 ## Related projects
 
 * [QuakeWorld Mapshots](https://github.com/vikpe/qw-mapshots)
