@@ -46,19 +46,19 @@ export default {
 ### Screenshot all maps defined in `config.maps.ts`
 
 ```shell
-pnpx playwright test
+pnpm exec playwright test
 ```
 
 ### Screenshot single map (exact match)
 
 ```shell
-pnpx playwright test --grep "#dm2#"
+pnpm exec playwright test --grep "#dm2#"
 ```
 
 ### Screenshot multiple maps (wildcard match)
 
 ```shell
-pnpx playwright test --grep "dm2"
+pnpm exec playwright test --grep "dm2"
 ```
 
 ## Tips

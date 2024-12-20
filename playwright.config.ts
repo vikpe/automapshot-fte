@@ -9,7 +9,7 @@ export default defineConfig({
   fullyParallel: true,
   workers: 1,
   webServer: {
-    command: "yarn dev",
+    command: "pnpm dev",
   },
   projects: [
     {
