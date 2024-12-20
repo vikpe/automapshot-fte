@@ -8,8 +8,8 @@
 ## Setup
 
 ```shell
-npx playwright install
-yarn install
+    pnpx playwright install
+pnpm install
 ```
 
 1. Rename `config.example.ts` to `config.ts`
@@ -46,19 +46,19 @@ export default {
 ### Screenshot all maps defined in `config.maps.ts`
 
 ```shell
-npx playwright test
+pnpx playwright test
 ```
 
 ### Screenshot single map (exact match)
 
 ```shell
-npx playwright test --grep "#dm2#"
+pnpx playwright test --grep "#dm2#"
 ```
 
 ### Screenshot multiple maps (wildcard match)
 
 ```shell
-npx playwright test --grep "dm2"
+pnpx playwright test --grep "dm2"
 ```
 
 ## Tips
